@@ -144,7 +144,7 @@ export default function SubmissionForm({ onSuccess }: SubmissionFormProps) {
       </div>
 
       {errorMsg && (
-        <div className="bg-rose-50 border border-rose-200 text-rose-800 p-3.5 mb-5 rounded-md text-xs flex items-start gap-2.5">
+        <div role="alert" className="bg-rose-50 border border-rose-200 text-rose-800 p-3.5 mb-5 rounded-md text-xs flex items-start gap-2.5">
           <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
           <span>{errorMsg}</span>
         </div>
@@ -154,30 +154,32 @@ export default function SubmissionForm({ onSuccess }: SubmissionFormProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Preferred Display Name */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-serif uppercase tracking-wider text-stone-600 font-bold">
+            <label htmlFor="pref-name" className="block text-xs font-serif uppercase tracking-wider text-stone-600 font-bold">
               Preferred Name <span className="text-primary-green">*</span>
             </label>
             <input
+              id="pref-name"
               type="text"
               required
               maxLength={50}
               placeholder="e.g. Aisha Ibrahim"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-1 focus:ring-primary-green rounded-sm px-3.5 py-2.5 text-xs text-stone-850 outline-none transition"
+              className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-2 focus:ring-primary-green focus:outline-none rounded-sm px-3.5 py-2.5 text-xs text-stone-850 outline-none transition focus-visible:ring-2 focus-visible:ring-primary-green"
             />
           </div>
 
           {/* Set / Graduation Year Dropdown */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-serif uppercase tracking-wider text-stone-600 font-bold">
+            <label htmlFor="grad-year" className="block text-xs font-serif uppercase tracking-wider text-stone-600 font-bold">
               Graduation Set <span className="text-primary-green">*</span>
             </label>
             <select
+              id="grad-year"
               required
               value={graduationYear}
               onChange={(e) => setGraduationYear(e.target.value)}
-              className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-1 focus:ring-primary-green rounded-sm px-3.5 py-2.5 text-xs text-stone-750 outline-none transition cursor-pointer"
+              className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-2 focus:ring-primary-green focus:outline-none rounded-sm px-3.5 py-2.5 text-xs text-stone-750 outline-none transition cursor-pointer focus-visible:ring-2 focus-visible:ring-primary-green"
             >
               <option value="" disabled>Select your Set / Role</option>
               {GRADUATION_SETS.map((set) => (
@@ -192,28 +194,30 @@ export default function SubmissionForm({ onSuccess }: SubmissionFormProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Department */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-serif uppercase tracking-wider text-stone-600 font-bold">
+            <label htmlFor="dept-faculty" className="block text-xs font-serif uppercase tracking-wider text-stone-600 font-bold">
               Department / Faculty <span className="text-stone-400 text-[10px] normal-case">(Optional)</span>
             </label>
             <input
+              id="dept-faculty"
               type="text"
               maxLength={50}
               placeholder="e.g. Computer Science"
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
-              className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-1 focus:ring-primary-green rounded-sm px-3.5 py-2.5 text-xs text-stone-850 outline-none transition"
+              className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-2 focus:ring-primary-green focus:outline-none rounded-sm px-3.5 py-2.5 text-xs text-stone-850 outline-none transition focus-visible:ring-2 focus-visible:ring-primary-green"
             />
           </div>
 
           {/* Country Representing */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-serif uppercase tracking-wider text-stone-600 font-bold">
+            <label htmlFor="cntry-select" className="block text-xs font-serif uppercase tracking-wider text-stone-600 font-bold">
               Representing Country <span className="text-primary-green">*</span>
             </label>
             <select
+              id="cntry-select"
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-1 focus:ring-primary-green rounded-sm px-3.5 py-2.5 text-xs text-stone-750 outline-none transition cursor-pointer"
+              className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-2 focus:ring-primary-green focus:outline-none rounded-sm px-3.5 py-2.5 text-xs text-stone-750 outline-none transition cursor-pointer focus-visible:ring-2 focus-visible:ring-primary-green"
             >
               {POPULAR_COUNTRIES.map((cntry) => (
                 <option key={cntry} value={cntry} className="bg-white text-stone-800">
@@ -227,7 +231,7 @@ export default function SubmissionForm({ onSuccess }: SubmissionFormProps) {
         {/* Message / Memory */}
         <div className="space-y-1.5">
           <div className="flex justify-between items-center">
-            <label className="block text-xs font-serif uppercase tracking-wider text-stone-600 font-bold">
+            <label htmlFor="comm-message" className="block text-xs font-serif uppercase tracking-wider text-stone-600 font-bold">
               Commemorative Message <span className="text-primary-green">*</span>
             </label>
             <span className={`text-[10px] items-center font-mono ${isMessageTooLong ? 'text-rose-600 font-bold' : 'text-stone-400'}`}>
@@ -235,13 +239,14 @@ export default function SubmissionForm({ onSuccess }: SubmissionFormProps) {
             </span>
           </div>
           <textarea
+            id="comm-message"
             required
             maxLength={130} // slight buffer, validation catches if strictly above 120
             rows={3}
             placeholder="Write your FUO memory or congratulations. (e.g., 'Found lifelong purpose, friendships, and values in Osogbo. Proud to representing Class of 2016!')"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-1 focus:ring-primary-green rounded-sm px-3.5 py-2.5 text-xs text-stone-850 outline-none transition resize-none leading-relaxed"
+            className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-2 focus:ring-primary-green focus:outline-none rounded-sm px-3.5 py-2.5 text-xs text-stone-850 outline-none transition resize-none leading-relaxed focus-visible:ring-2 focus-visible:ring-primary-green animate-none"
           />
         </div>
 
@@ -260,12 +265,14 @@ export default function SubmissionForm({ onSuccess }: SubmissionFormProps) {
                   type="button"
                   key={theme.id}
                   onClick={() => setSelectedBgIndex(i)}
-                  className={`w-7 h-7 rounded-full border flex items-center justify-center transition-all ${
+                  className={`w-7 h-7 rounded-full border flex items-center justify-center transition-all focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-1 ${
                     selectedBgIndex === i 
                       ? "ring-2 ring-primary-green border-white scale-110 shadow-sm" 
                       : "border-stone-300 hover:scale-[1.05]"
                   } ${theme.class.split(" ")[0]}`}
                   title={theme.label}
+                  aria-label={`Select paper shade: ${theme.label}`}
+                  aria-pressed={selectedBgIndex === i}
                 >
                   <span className={`w-2.5 h-2.5 rounded-full ${theme.dot}`}></span>
                 </button>
@@ -282,11 +289,13 @@ export default function SubmissionForm({ onSuccess }: SubmissionFormProps) {
                   type="button"
                   key={fnt.id}
                   onClick={() => setSelectedFontStyle(fnt.id)}
-                  className={`border rounded-sm p-2.5 text-left transition-all ${
+                  className={`border rounded-sm p-2.5 text-left transition-all focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-1 ${
                     selectedFontStyle === fnt.id 
                       ? "bg-stone-50 border-primary-green ring-1 ring-primary-green" 
                       : "bg-white border-stone-200 hover:bg-stone-50"
                   }`}
+                  aria-label={`Use font style: ${fnt.label}`}
+                  aria-pressed={selectedFontStyle === fnt.id}
                 >
                   <span className="block text-[10px] text-stone-500 font-mono font-bold tracking-tight uppercase">{fnt.label}</span>
                   <span className={`block text-xs mt-1 truncate ${fnt.id} text-primary-green font-semibold`}>{fnt.sample}</span>

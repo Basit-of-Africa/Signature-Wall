@@ -130,7 +130,9 @@ export default function App() {
                   document.getElementById("submission-container")?.scrollIntoView({ behavior: "smooth" });
                 }
               }}
-              className="px-5 py-2.5 bg-primary-green hover:bg-primary-green-hover text-white font-display font-semibold text-xs rounded-sm shadow-sm transition transform active:scale-95 inline-flex items-center gap-1.5 cursor-pointer"
+              className="px-5 py-2.5 bg-primary-green hover:bg-primary-green-hover text-white font-display font-semibold text-xs rounded-sm shadow-sm transition transform active:scale-95 inline-flex items-center gap-1.5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-1"
+              aria-expanded={isSubmitOpen}
+              aria-label="Toggle yearbook signature submission form"
             >
               <PenTool className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Leave Your Signature</span>
@@ -147,11 +149,13 @@ export default function App() {
                   }, 100);
                 }
               }}
-              className={`px-3.5 py-2.5 rounded-sm text-xs font-mono font-bold border transition flex items-center gap-1.5 cursor-pointer ${
+              className={`px-3.5 py-2.5 rounded-sm text-xs font-mono font-bold border transition flex items-center gap-1.5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-1 ${
                 isAdminView 
                   ? "bg-accent-gold/15 border-accent-gold text-accent-brown" 
                   : "bg-stone-50 border-stone-200 text-stone-600 hover:text-primary-green hover:border-primary-green-light"
               }`}
+              aria-expanded={isAdminView}
+              aria-label="Toggle administration console panel"
             >
               <Lock className="w-3.5 h-3.5" />
               <span className="hidden md:inline">School Portal</span>
@@ -227,7 +231,8 @@ export default function App() {
               <span className="text-xs font-mono text-slate-500">YEARBOOK SIGN-OFF WIDGET</span>
               <button 
                 onClick={() => setIsSubmitOpen(false)} 
-                className="text-xs text-rose-450 hover:text-rose-400 font-mono underline cursor-pointer"
+                className="text-xs text-rose-450 hover:text-rose-400 font-mono underline cursor-pointer focus:outline-none focus:ring-2 focus:ring-rose-500 rounded px-1 flex-inline"
+                aria-label="Close yearbook signature form editor"
               >
                 Close Editor
               </button>
@@ -245,7 +250,8 @@ export default function App() {
               </span>
               <button 
                 onClick={() => setIsAdminView(false)} 
-                className="text-xs text-rose-450 hover:text-rose-400 font-mono underline cursor-pointer"
+                className="text-xs text-rose-450 hover:text-rose-400 font-mono underline cursor-pointer focus:outline-none focus:ring-2 focus:ring-rose-500 rounded px-1 flex-inline"
+                aria-label="Close high security admin container"
               >
                 Hide Console
               </button>
@@ -271,11 +277,13 @@ export default function App() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1.5" id="time-capsule-era-grid">
             <button
               onClick={() => handleEraSelect("early")}
-              className={`p-3.5 rounded-sm border text-left transition duration-200 cursor-pointer ${
+              className={`p-3.5 rounded-sm border text-left transition duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-1 ${
                 selectedEra === "early"
                   ? "bg-primary-green text-white border-primary-green shadow-md"
                   : "bg-stone-50 border-stone-200 hover:border-primary-green hover:bg-white text-stone-700"
               }`}
+              aria-pressed={selectedEra === "early"}
+              aria-label="Time capsule chapter 1: The Pioneers years 2005 to 2011"
             >
               <span className={`block text-xs font-mono font-bold tracking-wider mb-1 uppercase ${selectedEra === "early" ? "text-accent-gold" : "text-stone-400"}`}>Era I</span>
               <span className={`block font-serif text-sm font-bold ${selectedEra === "early" ? "text-white" : "text-stone-800"}`}>The Pioneers</span>
@@ -284,11 +292,13 @@ export default function App() {
 
             <button
               onClick={() => handleEraSelect("growth")}
-              className={`p-3.5 rounded-sm border text-left transition duration-200 cursor-pointer ${
+              className={`p-3.5 rounded-sm border text-left transition duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-1 ${
                 selectedEra === "growth"
                   ? "bg-primary-green text-white border-primary-green shadow-md"
                   : "bg-stone-50 border-stone-200 hover:border-primary-green hover:bg-white text-stone-700"
               }`}
+              aria-pressed={selectedEra === "growth"}
+              aria-label="Time capsule chapter 2: Growth Years 2012 to 2018"
             >
               <span className={`block text-xs font-mono font-bold tracking-wider mb-1 uppercase ${selectedEra === "growth" ? "text-accent-gold" : "text-stone-400"}`}>Era II</span>
               <span className={`block font-serif text-sm font-bold ${selectedEra === "growth" ? "text-white" : "text-stone-800"}`}>Growth Years</span>
@@ -297,11 +307,13 @@ export default function App() {
 
             <button
               onClick={() => handleEraSelect("recent")}
-              className={`p-3.5 rounded-sm border text-left transition duration-200 cursor-pointer ${
+              className={`p-3.5 rounded-sm border text-left transition duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-1 ${
                 selectedEra === "recent"
                   ? "bg-primary-green text-white border-primary-green shadow-md"
                   : "bg-stone-50 border-stone-200 hover:border-primary-green hover:bg-white text-stone-700"
               }`}
+              aria-pressed={selectedEra === "recent"}
+              aria-label="Time capsule chapter 3: Recent Generation years 2019 to 2026"
             >
               <span className={`block text-xs font-mono font-bold tracking-wider mb-1 uppercase ${selectedEra === "recent" ? "text-accent-gold" : "text-stone-400"}`}>Era III</span>
               <span className={`block font-serif text-sm font-bold ${selectedEra === "recent" ? "text-white" : "text-stone-800"}`}>Recent Gen</span>
@@ -310,11 +322,13 @@ export default function App() {
 
             <button
               onClick={() => handleEraSelect("other")}
-              className={`p-3.5 rounded-sm border text-left transition duration-200 cursor-pointer ${
+              className={`p-3.5 rounded-sm border text-left transition duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-1 ${
                 selectedEra === "other"
                   ? "bg-primary-green text-white border-primary-green shadow-md"
                   : "bg-stone-50 border-stone-200 hover:border-primary-green hover:bg-white text-stone-700"
               }`}
+              aria-pressed={selectedEra === "other"}
+              aria-label="Time capsule chapter 4: Staff, Faculty, Founders and Scholars"
             >
               <span className={`block text-xs font-mono font-bold tracking-wider mb-1 uppercase ${selectedEra === "other" ? "text-accent-gold" : "text-stone-400"}`}>Era IV</span>
               <span className={`block font-serif text-sm font-bold ${selectedEra === "other" ? "text-white" : "text-stone-800"}`}>Staff & Faculty</span>
@@ -381,10 +395,11 @@ export default function App() {
                 <Search className="absolute left-3 top-3 w-4 h-4 text-stone-400" />
                 <input
                   type="text"
+                  aria-label="Search memory wall signatures"
                   placeholder="Search by name, message, major..."
                   value={querySearch}
                   onChange={(e) => setQuerySearch(e.target.value)}
-                  className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-1 focus:ring-primary-green rounded-sm pl-9 pr-4 py-2.5 text-xs text-stone-800 outline-none transition"
+                  className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-2 focus:ring-primary-green focus:outline-none rounded-sm pl-9 pr-4 py-2.5 text-xs text-stone-800 outline-none transition"
                 />
               </div>
 
@@ -396,7 +411,8 @@ export default function App() {
                     setSelectedSet(e.target.value);
                     setSelectedEra("all"); // clear era to prevent conflict
                   }}
-                  className="w-full bg-white border border-stone-200 text-stone-700 text-xs rounded-sm px-3 py-2.5 outline-none hover:border-primary-green cursor-pointer transition"
+                  aria-label="Filter signatures on memory wall by graduation set or role"
+                  className="w-full bg-white border border-stone-200 text-stone-700 text-xs rounded-sm px-3 py-2.5 outline-none hover:border-primary-green focus:border-primary-green focus:ring-2 focus:ring-primary-green focus:outline-none transition cursor-pointer"
                 >
                   <option value="all">Every Set / Class</option>
                   {GRADUATION_SETS_FILTER.map((set) => (
@@ -410,7 +426,8 @@ export default function App() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full bg-white border border-stone-200 text-stone-700 text-xs rounded-sm px-3 py-2.5 outline-none hover:border-primary-green cursor-pointer transition"
+                  aria-label="Sort memory wall signatures"
+                  className="w-full bg-white border border-stone-200 text-stone-700 text-xs rounded-sm px-3 py-2.5 outline-none hover:border-primary-green focus:border-primary-green focus:ring-2 focus:ring-primary-green focus:outline-none transition cursor-pointer"
                 >
                   <option value="recent">Recent Signatures</option>
                   <option value="oldest">Early Signatures</option>

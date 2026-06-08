@@ -173,8 +173,9 @@ export default function SignatureCard({
               {signature.status !== "approved" && (
                 <button
                   onClick={() => onModerate && onModerate(signature.id, "approved")}
-                  className="p-1 hover:bg-emerald-500/10 hover:text-emerald-500 rounded text-slate-800 transition border border-transparent hover:border-emerald-500/25 cursor-pointer"
+                  className="p-1 hover:bg-emerald-500/10 hover:text-emerald-500 rounded text-slate-800 transition border border-transparent hover:border-emerald-500/25 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-offset-1"
                   title="Approve Signature"
+                  aria-label={`Approve signature by ${signature.name}`}
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                 </button>
@@ -183,8 +184,9 @@ export default function SignatureCard({
               {signature.status !== "flagged" && (
                 <button
                   onClick={() => onModerate && onModerate(signature.id, "flagged")}
-                  className="p-1 hover:bg-amber-500/10 hover:text-amber-500 rounded text-slate-800 transition border border-transparent hover:border-amber-500/25 cursor-pointer"
+                  className="p-1 hover:bg-amber-500/10 hover:text-amber-500 rounded text-slate-800 transition border border-transparent hover:border-amber-500/25 cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent-gold focus:ring-offset-1"
                   title="Flag Signature"
+                  aria-label={`Flag signature by ${signature.name}`}
                 >
                   <Flag className="w-3.5 h-3.5" />
                 </button>
@@ -192,8 +194,9 @@ export default function SignatureCard({
 
               <button
                 onClick={() => onDelete && onDelete(signature.id)}
-                className="p-1 hover:bg-rose-500/10 hover:text-rose-500 rounded text-rose-950 transition border border-transparent hover:border-rose-500/25 cursor-pointer"
+                className="p-1 hover:bg-rose-500/10 hover:text-rose-500 rounded text-rose-950 transition border border-transparent hover:border-rose-500/25 cursor-pointer focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1"
                 title="Delete Signature"
+                aria-label={`Delete signature by ${signature.name}`}
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -202,12 +205,13 @@ export default function SignatureCard({
             <button
               onClick={handleReport}
               disabled={reported}
-              className={`p-1.5 rounded-lg transition-colors inline-flex items-center gap-1 cursor-pointer hover:bg-slate-900/5 ${
+              className={`p-1.5 rounded-lg transition-colors inline-flex items-center gap-1 cursor-pointer hover:bg-slate-900/5 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-1 ${
                 reported 
-                  ? "text-rose-600 font-bold" 
+                  ? "text-rose-600 font-bold font-mono" 
                   : "text-slate-800/60 hover:text-rose-600"
               }`}
               title="Report inappropriate content"
+              aria-label={`Report signature by ${signature.name} as inappropriate`}
             >
               {reported ? (
                 <>

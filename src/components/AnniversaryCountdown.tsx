@@ -49,39 +49,44 @@ export default function AnniversaryCountdown() {
       </p>
 
       {timeLeft.isCompleted ? (
-        <div className="text-accent-brown font-serif font-bold text-lg md:text-xl px-4 py-2.5 bg-accent-gold/10 border border-accent-gold/25 rounded-md max-w-md mx-auto">
+        <div className="text-accent-brown font-serif font-bold text-lg md:text-xl px-4 py-2.5 bg-accent-gold/10 border border-accent-gold/25 rounded-md max-w-md mx-auto" role="status" aria-live="polite">
           🎉 The FUO @20 Celebration peak has begun! Wall is now being compiled into the university archive.
         </div>
       ) : (
-        <div className="grid grid-cols-4 gap-2 sm:gap-4 max-w-lg mx-auto" id="countdown-grid">
-          <div className="bg-white border border-stone-200 rounded-sm p-3 sm:p-4">
-            <span className="block font-serif text-2xl sm:text-4xl font-bold text-primary-green ml-1">
-              {String(timeLeft.days).padStart(2, "0")}
-            </span>
-            <span className="text-[10px] sm:text-xs text-stone-500 uppercase tracking-widest font-mono">Days</span>
+        <>
+          <div className="sr-only" role="timer" aria-live="polite">
+            Commemorative event closes in: {timeLeft.days} days, {timeLeft.hours} hours, {timeLeft.minutes} minutes, {timeLeft.seconds} seconds.
           </div>
+          <div className="grid grid-cols-4 gap-2 sm:gap-4 max-w-lg mx-auto" id="countdown-grid" aria-hidden="true">
+            <div className="bg-white border border-stone-200 rounded-sm p-3 sm:p-4">
+              <span className="block font-serif text-2xl sm:text-4xl font-bold text-primary-green ml-1">
+                {String(timeLeft.days).padStart(2, "0")}
+              </span>
+              <span className="text-[10px] sm:text-xs text-stone-500 uppercase tracking-widest font-mono">Days</span>
+            </div>
 
-          <div className="bg-white border border-stone-200 rounded-sm p-3 sm:p-4">
-            <span className="block font-serif text-2xl sm:text-4xl font-bold text-primary-green ml-1">
-              {String(timeLeft.hours).padStart(2, "0")}
-            </span>
-            <span className="text-[10px] sm:text-xs text-stone-500 uppercase tracking-widest font-mono">Hours</span>
-          </div>
+            <div className="bg-white border border-stone-200 rounded-sm p-3 sm:p-4">
+              <span className="block font-serif text-2xl sm:text-4xl font-bold text-primary-green ml-1">
+                {String(timeLeft.hours).padStart(2, "0")}
+              </span>
+              <span className="text-[10px] sm:text-xs text-stone-500 uppercase tracking-widest font-mono">Hours</span>
+            </div>
 
-          <div className="bg-white border border-stone-200 rounded-sm p-3 sm:p-4">
-            <span className="block font-serif text-2xl sm:text-4xl font-bold text-primary-green ml-1">
-              {String(timeLeft.minutes).padStart(2, "0")}
-            </span>
-            <span className="text-[10px] sm:text-xs text-stone-500 uppercase tracking-widest font-mono">Mins</span>
-          </div>
+            <div className="bg-white border border-stone-200 rounded-sm p-3 sm:p-4">
+              <span className="block font-serif text-2xl sm:text-4xl font-bold text-primary-green ml-1">
+                {String(timeLeft.minutes).padStart(2, "0")}
+              </span>
+              <span className="text-[10px] sm:text-xs text-stone-500 uppercase tracking-widest font-mono">Mins</span>
+            </div>
 
-          <div className="bg-white border border-stone-200 rounded-sm p-3 sm:p-4">
-            <span className="block font-serif text-2xl sm:text-4xl font-bold text-primary-green ml-1">
-              {String(timeLeft.seconds).padStart(2, "0")}
-            </span>
-            <span className="text-[10px] sm:text-xs text-stone-500 uppercase tracking-widest font-mono">Secs</span>
+            <div className="bg-white border border-stone-200 rounded-sm p-3 sm:p-4">
+              <span className="block font-serif text-2xl sm:text-4xl font-bold text-primary-green ml-1">
+                {String(timeLeft.seconds).padStart(2, "0")}
+              </span>
+              <span className="text-[10px] sm:text-xs text-stone-500 uppercase tracking-widest font-mono">Secs</span>
+            </div>
           </div>
-        </div>
+        </>
       )}
 
       <div className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-mono text-stone-400">

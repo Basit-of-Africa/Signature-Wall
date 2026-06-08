@@ -188,7 +188,7 @@ export default function AdminDashboard({ onDatabaseUpdate }: AdminDashboardProps
         </p>
 
         {authError && (
-          <div className="bg-rose-50 border border-rose-200 text-rose-800 p-3 rounded-md text-xs mb-4 flex items-center gap-2">
+          <div role="alert" className="bg-rose-50 border border-rose-200 text-rose-800 p-3 rounded-md text-xs mb-4 flex items-center gap-2">
             <ShieldAlert className="w-4 h-4 shrink-0" />
             <span>{authError}</span>
           </div>
@@ -196,15 +196,16 @@ export default function AdminDashboard({ onDatabaseUpdate }: AdminDashboardProps
 
         <form onSubmit={handleLogin} className="space-y-4" id="admin-login-form">
           <div className="space-y-1.5 text-left">
-            <label className="block text-[10px] font-mono uppercase tracking-wider text-stone-500">
+            <label htmlFor="admin-pin" className="block text-[10px] font-mono uppercase tracking-wider text-stone-500 font-bold">
               Administrative PIN / Password
             </label>
             <input
+              id="admin-pin"
               type="password"
               placeholder="Enter PIN (e.g., fuo20admin)"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-1 focus:ring-primary-green rounded-sm px-4 py-2.5 text-xs text-stone-800 outline-none leading-relaxed transition"
+              className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-2 focus:ring-primary-green focus:outline-none rounded-sm px-4 py-2.5 text-xs text-stone-880 outline-none leading-relaxed transition focus-visible:ring-2 focus-visible:ring-primary-green"
             />
           </div>
 
@@ -241,21 +242,24 @@ export default function AdminDashboard({ onDatabaseUpdate }: AdminDashboardProps
           {signatures.length > 0 && (
             <button
               onClick={handleExportCSV}
-              className="px-4 py-2 bg-stone-50 hover:bg-stone-100 text-stone-700 rounded-sm text-xs font-mono font-medium flex items-center gap-1.5 border border-stone-200 transition cursor-pointer"
+              className="px-4 py-2 bg-stone-50 hover:bg-stone-100 text-stone-700 rounded-sm text-xs font-mono font-medium flex items-center gap-1.5 border border-stone-200 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent-gold"
+              aria-label="Export all yearbooks as CSV file"
             >
               <Download className="w-3.5 h-3.5 text-accent-gold" /> Export Yearbooks (.CSV)
             </button>
           )}
           <button
             onClick={() => fetchAdminSignatures(sessionStorage.getItem("fuo_admin_token") || password)}
-            className="p-2 bg-stone-50 hover:bg-stone-100 text-stone-750 rounded-sm border border-stone-200 transition cursor-pointer"
+            className="p-2 bg-stone-50 hover:bg-stone-100 text-stone-750 rounded-sm border border-stone-200 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-green"
             title="Refresh database records"
+            aria-label="Refresh signatures database ledger"
           >
             <RefreshCw className={`w-4 h-4 text-stone-600 ${loading ? 'animate-spin' : ''}`} />
           </button>
           <button
             onClick={handleLogout}
-            className="px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-800 rounded-sm text-xs font-mono font-bold border border-rose-200 transition cursor-pointer"
+            className="px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-800 rounded-sm text-xs font-mono font-bold border border-rose-200 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-rose-500"
+            aria-label="Log out of admin moderation session"
           >
             Log Out
           </button>
@@ -297,10 +301,11 @@ export default function AdminDashboard({ onDatabaseUpdate }: AdminDashboardProps
           <Search className="absolute left-3.5 top-3 w-4 h-4 text-stone-400" />
           <input
             type="text"
+            aria-label="Search administration signatures"
             placeholder="Search entries by name, message, major/dept..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-1 focus:ring-primary-green rounded-sm pl-10 pr-4 py-2.5 text-xs text-stone-800 outline-none transition"
+            className="w-full bg-white border border-stone-200 focus:border-primary-green focus:ring-2 focus:ring-primary-green focus:outline-none rounded-sm pl-10 pr-4 py-2.5 text-xs text-stone-800 outline-none transition"
           />
         </div>
 
@@ -310,7 +315,8 @@ export default function AdminDashboard({ onDatabaseUpdate }: AdminDashboardProps
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="bg-white border border-stone-200 text-stone-700 text-xs rounded-sm px-3 py-2.5 outline-none cursor-pointer hover:border-primary-green transition"
+            aria-label="Filter administration records by validation status"
+            className="bg-white border border-stone-200 text-stone-700 text-xs rounded-sm px-3 py-2.5 outline-none cursor-pointer hover:border-primary-green focus:border-primary-green focus:ring-2 focus:ring-primary-green focus:outline-none transition"
           >
             <option value="all">All Moderation Status</option>
             <option value="approved">Approved Live</option>
@@ -390,7 +396,8 @@ export default function AdminDashboard({ onDatabaseUpdate }: AdminDashboardProps
                           <button
                             disabled={actionLoadingId === sig.id}
                             onClick={() => handleUpdateStatus(sig.id, "approved")}
-                            className="px-2.5 py-1 bg-emerald-50 hover:bg-[#1B4332] text-emerald-800 hover:text-white rounded-sm border border-emerald-200 transition text-[10px] font-serif font-bold cursor-pointer"
+                            className="px-2.5 py-1 bg-emerald-50 hover:bg-[#1B4332] text-emerald-800 hover:text-white rounded-sm border border-emerald-200 transition text-[10px] font-serif font-bold cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                            aria-label={`Approve signature by ${sig.name}`}
                           >
                             Approve
                           </button>
@@ -400,7 +407,8 @@ export default function AdminDashboard({ onDatabaseUpdate }: AdminDashboardProps
                           <button
                             disabled={actionLoadingId === sig.id}
                             onClick={() => handleUpdateStatus(sig.id, "flagged")}
-                            className="px-2.5 py-1 bg-amber-50 hover:bg-accent-brown text-amber-800 hover:text-white rounded-sm border border-amber-200 transition text-[10px] font-serif font-bold cursor-pointer"
+                            className="px-2.5 py-1 bg-amber-50 hover:bg-accent-brown text-amber-800 hover:text-white rounded-sm border border-amber-200 transition text-[10px] font-serif font-bold cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent-gold"
+                            aria-label={`Flag and hide signature by ${sig.name}`}
                           >
                             Flag / Hide
                           </button>
@@ -409,8 +417,9 @@ export default function AdminDashboard({ onDatabaseUpdate }: AdminDashboardProps
                         <button
                           disabled={actionLoadingId === sig.id}
                           onClick={() => handleDelete(sig.id)}
-                          className="p-1.5 bg-rose-50 hover:bg-rose-600 text-rose-800 hover:text-white rounded-sm border border-rose-200 transition cursor-pointer"
+                          className="p-1.5 bg-rose-50 hover:bg-rose-600 text-rose-800 hover:text-white rounded-sm border border-rose-200 transition cursor-pointer focus:outline-none focus:ring-2 focus:ring-rose-500"
                           title="Permanently Delete Record"
+                          aria-label={`Permanently delete memory by ${sig.name}`}
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
