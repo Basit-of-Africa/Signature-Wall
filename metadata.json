@@ -1,0 +1,6 @@
+{
+  "name": "FUO @20 Signature Wall",
+  "description": "A commemorative visual memory wall and interactive digital guestbook celebrating 20 years of academic excellence and community legacy at Fountain University.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
